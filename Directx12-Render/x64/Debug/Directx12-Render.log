@@ -1,0 +1,4 @@
+﻿  main.cpp
+D:\Code\Directx12-Render\Directx12-Render\d3dx12.h(15,10): error C1083: Cannot open include file: 'd3dx12_barriers.h': No such file or directory
+  (compiling source file 'main.cpp')
+  
