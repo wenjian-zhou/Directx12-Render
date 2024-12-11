@@ -196,15 +196,24 @@ void DirectX12Render::LoadAssets()
 
     // Create the vertex buffer.
     {
-        // Define the geometry for a triangle.
-        Vertex triangleVertices[] =
+        // Define the geometry for a quad.
+        Vertex quadVertices[] =
         {
-            { { 0.0f, 0.25f * m_aspectRatio, 0.0f }, { 1.0f, 0.0f, 0.0f, 1.0f } },
-            { { 0.25f, -0.25f * m_aspectRatio, 0.0f }, { 0.0f, 1.0f, 0.0f, 1.0f } },
-            { { -0.25f, -0.25f * m_aspectRatio, 0.0f }, { 0.0f, 0.0f, 1.0f, 1.0f } }
+            {{-0.5f, 0.5f * m_aspectRatio, 0.0f}, {1.0f, 0.0f, 0.0f, 1.0f}},
+            {{0.5f, -0.5f * m_aspectRatio, 0.0f}, {0.0f, 1.0f, 0.0f, 1.0f}},
+            {{-0.5f, -0.5f * m_aspectRatio, 0.0f}, {0.0f, 0.0f, 1.0f, 1.0f}},
+            {{0.5f, 0.5f * m_aspectRatio, 0.0f}, {1.0f, 0.0f, 1.0f, 1.0f}},
         };
 
-        const UINT vertexBufferSize = sizeof(triangleVertices);
+        // Create index buffer.
+		DWORD quadIndices[] =
+		{
+			0, 1, 2,
+			0, 3, 1
+		};
+
+        const UINT vertexBufferSize = sizeof(quadVertices);
+		const UINT indexBufferSize = sizeof(quadIndices);
 
         // Note: using upload heaps to transfer static data like vert buffers is not 
         // recommended. Every time the GPU needs it, the upload heap will be marshalled 
@@ -218,17 +227,37 @@ void DirectX12Render::LoadAssets()
             nullptr,
             IID_PPV_ARGS(&m_vertexBuffer)));
 
-        // Copy the triangle data to the vertex buffer.
+        // Copy the quad data to the vertex buffer.
         UINT8* pVertexDataBegin;
         CD3DX12_RANGE readRange(0, 0);        // We do not intend to read from this resource on the CPU.
         ThrowIfFailed(m_vertexBuffer->Map(0, &readRange, reinterpret_cast<void**>(&pVertexDataBegin)));
-        memcpy(pVertexDataBegin, triangleVertices, sizeof(triangleVertices));
+        memcpy(pVertexDataBegin, quadVertices, sizeof(quadVertices));
         m_vertexBuffer->Unmap(0, nullptr);
 
         // Initialize the vertex buffer view.
         m_vertexBufferView.BufferLocation = m_vertexBuffer->GetGPUVirtualAddress();
         m_vertexBufferView.StrideInBytes = sizeof(Vertex);
         m_vertexBufferView.SizeInBytes = vertexBufferSize;
+
+		// Use upload heap to transfer index buffer data to default heap.
+		ThrowIfFailed(m_device->CreateCommittedResource(
+			&CD3DX12_HEAP_PROPERTIES(D3D12_HEAP_TYPE_UPLOAD),
+			D3D12_HEAP_FLAG_NONE,
+			&CD3DX12_RESOURCE_DESC::Buffer(indexBufferSize),
+			D3D12_RESOURCE_STATE_GENERIC_READ,
+			nullptr,
+			IID_PPV_ARGS(&m_indexBuffer)));
+
+		// Copy the quad data to the index buffer.
+		UINT8* pIndexDataBegin;
+		ThrowIfFailed(m_indexBuffer->Map(0, &readRange, reinterpret_cast<void**>(&pIndexDataBegin)));
+		memcpy(pIndexDataBegin, quadIndices, sizeof(quadIndices));
+		m_indexBuffer->Unmap(0, nullptr);
+
+		// Initialize the index buffer view.
+		m_indexBufferView.BufferLocation = m_indexBuffer->GetGPUVirtualAddress();
+		m_indexBufferView.Format = DXGI_FORMAT_R32_UINT;
+		m_indexBufferView.SizeInBytes = indexBufferSize;
     }
 
     // Create synchronization objects.
@@ -306,8 +335,10 @@ void DirectX12Render::PopulateCommandList()
     // Record commands.
     const float clearColor[] = { 0.0f, 0.2f, 0.4f, 1.0f };
     m_commandList->ClearRenderTargetView(rtvHandle, clearColor, 0, nullptr);
+	m_commandList->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
     m_commandList->IASetVertexBuffers(0, 1, &m_vertexBufferView);
-    m_commandList->DrawInstanced(3, 1, 0, 0);
+    m_commandList->IASetIndexBuffer(&m_indexBufferView);
+    m_commandList->DrawIndexedInstanced(6, 1, 0, 0, 0);
 
     // Indicate that the back buffer will now be used to present.
     m_commandList->ResourceBarrier(1, &CD3DX12_RESOURCE_BARRIER::Transition(m_renderTargets[m_frameIndex].Get(), D3D12_RESOURCE_STATE_RENDER_TARGET, D3D12_RESOURCE_STATE_PRESENT));
