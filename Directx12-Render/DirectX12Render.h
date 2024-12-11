@@ -56,6 +56,11 @@ private:
     ComPtr<ID3D12GraphicsCommandList> m_commandList;
     UINT m_rtvDescriptorSize;
 
+    // Resources for depth/stencil data.
+	ComPtr<ID3D12Resource> m_depthStencilBuffer;
+	ComPtr<ID3D12DescriptorHeap> m_dsvHeap;
+	UINT m_dsvDescriptorSize;
+
     // App resources.
     ComPtr<ID3D12Resource> m_vertexBuffer;
     D3D12_VERTEX_BUFFER_VIEW m_vertexBufferView;
