@@ -131,6 +131,7 @@ void DirectX12Render::LoadPipeline()
         }
     }
 
+	// Create command allocator.
     ThrowIfFailed(m_device->CreateCommandAllocator(D3D12_COMMAND_LIST_TYPE_DIRECT, IID_PPV_ARGS(&m_commandAllocator)));
 }
 
