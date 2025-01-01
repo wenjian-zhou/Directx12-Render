@@ -14,13 +14,13 @@
 
 using namespace Microsoft::WRL;
 
-DXSample::DXSample(UINT width, UINT height, std::wstring name) :
+DXSample::DXSample(uint32_t width, uint32_t height, std::wstring name) :
     m_width(width),
     m_height(height),
     m_title(name),
     m_useWarpDevice(false)
 {
-    WCHAR assetsPath[512];
+    wchar_t assetsPath[512];
     GetAssetsPath(assetsPath, _countof(assetsPath));
     m_assetsPath = assetsPath;
 
@@ -53,12 +53,12 @@ void DXSample::GetHardwareAdapter(
     if (SUCCEEDED(pFactory->QueryInterface(IID_PPV_ARGS(&factory6))))
     {
         for (
-            UINT adapterIndex = 0;
+            uint32_t adapterIndex = 0;
             SUCCEEDED(factory6->EnumAdapterByGpuPreference(
                 adapterIndex,
                 requestHighPerformanceAdapter == true ? DXGI_GPU_PREFERENCE_HIGH_PERFORMANCE : DXGI_GPU_PREFERENCE_UNSPECIFIED,
                 IID_PPV_ARGS(&adapter)));
-                ++adapterIndex)
+            ++adapterIndex)
         {
             DXGI_ADAPTER_DESC1 desc;
             adapter->GetDesc1(&desc);
@@ -79,9 +79,9 @@ void DXSample::GetHardwareAdapter(
         }
     }
 
-    if (adapter.Get() == nullptr)
+    if(adapter.Get() == nullptr)
     {
-        for (UINT adapterIndex = 0; SUCCEEDED(pFactory->EnumAdapters1(adapterIndex, &adapter)); ++adapterIndex)
+        for (uint32_t adapterIndex = 0; SUCCEEDED(pFactory->EnumAdapters1(adapterIndex, &adapter)); ++adapterIndex)
         {
             DXGI_ADAPTER_DESC1 desc;
             adapter->GetDesc1(&desc);
@@ -101,7 +101,7 @@ void DXSample::GetHardwareAdapter(
             }
         }
     }
-
+    
     *ppAdapter = adapter.Detach();
 }
 
@@ -114,11 +114,11 @@ void DXSample::SetCustomWindowText(LPCWSTR text)
 
 // Helper function for parsing any supplied command line args.
 _Use_decl_annotations_
-void DXSample::ParseCommandLineArgs(WCHAR* argv[], int argc)
+void DXSample::ParseCommandLineArgs(wchar_t* argv[], int argc)
 {
     for (int i = 1; i < argc; ++i)
     {
-        if (_wcsnicmp(argv[i], L"-warp", wcslen(argv[i])) == 0 ||
+        if (_wcsnicmp(argv[i], L"-warp", wcslen(argv[i])) == 0 || 
             _wcsnicmp(argv[i], L"/warp", wcslen(argv[i])) == 0)
         {
             m_useWarpDevice = true;

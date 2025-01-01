@@ -10,6 +10,7 @@
 //*********************************************************
 
 #pragma once
+#include "stdafx.h"
 #include <stdexcept>
 
 // Note that while ComPtr is used to manage the lifetime of resources on the CPU,
@@ -21,7 +22,7 @@ using Microsoft::WRL::ComPtr;
 inline std::string HrToString(HRESULT hr)
 {
     char s_str[64] = {};
-    sprintf_s(s_str, "HRESULT of 0x%08X", static_cast<UINT>(hr));
+    sprintf_s(s_str, "HRESULT of 0x%08X", static_cast<uint32_t>(hr));
     return std::string(s_str);
 }
 
@@ -44,7 +45,7 @@ inline void ThrowIfFailed(HRESULT hr)
     }
 }
 
-inline void GetAssetsPath(_Out_writes_(pathSize) WCHAR* path, UINT pathSize)
+inline void GetAssetsPath(_Out_writes_(pathSize) wchar_t* path, uint32_t pathSize)
 {
     if (path == nullptr)
     {
@@ -58,14 +59,14 @@ inline void GetAssetsPath(_Out_writes_(pathSize) WCHAR* path, UINT pathSize)
         throw std::exception();
     }
 
-    WCHAR* lastSlash = wcsrchr(path, L'\\');
+    wchar_t* lastSlash = wcsrchr(path, L'\\');
     if (lastSlash)
     {
         *(lastSlash + 1) = L'\0';
     }
 }
 
-inline HRESULT ReadDataFromFile(LPCWSTR filename, byte** data, UINT* size)
+inline HRESULT ReadDataFromFile(LPCWSTR filename, uint8_t** data, uint32_t* size)
 {
     using namespace Microsoft::WRL;
 
@@ -98,7 +99,7 @@ inline HRESULT ReadDataFromFile(LPCWSTR filename, byte** data, UINT* size)
         throw std::exception();
     }
 
-    *data = reinterpret_cast<byte*>(malloc(fileInfo.EndOfFile.LowPart));
+    *data = reinterpret_cast<uint8_t*>(malloc(fileInfo.EndOfFile.LowPart));
     *size = fileInfo.EndOfFile.LowPart;
 
     if (!ReadFile(file.Get(), *data, fileInfo.EndOfFile.LowPart, nullptr, nullptr))
@@ -109,7 +110,7 @@ inline HRESULT ReadDataFromFile(LPCWSTR filename, byte** data, UINT* size)
     return S_OK;
 }
 
-inline HRESULT ReadDataFromDDSFile(LPCWSTR filename, byte** data, UINT* offset, UINT* size)
+inline HRESULT ReadDataFromDDSFile(LPCWSTR filename, uint8_t** data, uint32_t* offset, uint32_t* size)
 {
     if (FAILED(ReadDataFromFile(filename, data, size)))
     {
@@ -117,8 +118,8 @@ inline HRESULT ReadDataFromDDSFile(LPCWSTR filename, byte** data, UINT* offset, 
     }
 
     // DDS files always start with the same magic number.
-    static const UINT DDS_MAGIC = 0x20534444;
-    UINT magicNumber = *reinterpret_cast<const UINT*>(*data);
+    static const uint32_t DDS_MAGIC = 0x20534444;
+    uint32_t magicNumber = *reinterpret_cast<const uint32_t*>(*data);
     if (magicNumber != DDS_MAGIC)
     {
         return E_FAIL;
@@ -126,41 +127,41 @@ inline HRESULT ReadDataFromDDSFile(LPCWSTR filename, byte** data, UINT* offset, 
 
     struct DDS_PIXELFORMAT
     {
-        UINT size;
-        UINT flags;
-        UINT fourCC;
-        UINT rgbBitCount;
-        UINT rBitMask;
-        UINT gBitMask;
-        UINT bBitMask;
-        UINT aBitMask;
+        uint32_t size;
+        uint32_t flags;
+        uint32_t fourCC;
+        uint32_t rgbBitCount;
+        uint32_t rBitMask;
+        uint32_t gBitMask;
+        uint32_t bBitMask;
+        uint32_t aBitMask;
     };
 
     struct DDS_HEADER
     {
-        UINT size;
-        UINT flags;
-        UINT height;
-        UINT width;
-        UINT pitchOrLinearSize;
-        UINT depth;
-        UINT mipMapCount;
-        UINT reserved1[11];
+        uint32_t size;
+        uint32_t flags;
+        uint32_t height;
+        uint32_t width;
+        uint32_t pitchOrLinearSize;
+        uint32_t depth;
+        uint32_t mipMapCount;
+        uint32_t reserved1[11];
         DDS_PIXELFORMAT ddsPixelFormat;
-        UINT caps;
-        UINT caps2;
-        UINT caps3;
-        UINT caps4;
-        UINT reserved2;
+        uint32_t caps;
+        uint32_t caps2;
+        uint32_t caps3;
+        uint32_t caps4;
+        uint32_t reserved2;
     };
 
-    auto ddsHeader = reinterpret_cast<const DDS_HEADER*>(*data + sizeof(UINT));
+    auto ddsHeader = reinterpret_cast<const DDS_HEADER*>(*data + sizeof(uint32_t));
     if (ddsHeader->size != sizeof(DDS_HEADER) || ddsHeader->ddsPixelFormat.size != sizeof(DDS_PIXELFORMAT))
     {
         return E_FAIL;
     }
 
-    const ptrdiff_t ddsDataOffset = sizeof(UINT) + sizeof(DDS_HEADER);
+    const ptrdiff_t ddsDataOffset = sizeof(uint32_t) + sizeof(DDS_HEADER);
     *offset = ddsDataOffset;
     *size = *size - ddsDataOffset;
 
@@ -173,9 +174,9 @@ inline void SetName(ID3D12Object* pObject, LPCWSTR name)
 {
     pObject->SetName(name);
 }
-inline void SetNameIndexed(ID3D12Object* pObject, LPCWSTR name, UINT index)
+inline void SetNameIndexed(ID3D12Object* pObject, LPCWSTR name, uint32_t index)
 {
-    WCHAR fullName[50];
+    wchar_t fullName[50];
     if (swprintf_s(fullName, L"%s[%u]", name, index) > 0)
     {
         pObject->SetName(fullName);
@@ -185,7 +186,7 @@ inline void SetNameIndexed(ID3D12Object* pObject, LPCWSTR name, UINT index)
 inline void SetName(ID3D12Object*, LPCWSTR)
 {
 }
-inline void SetNameIndexed(ID3D12Object*, LPCWSTR, UINT)
+inline void SetNameIndexed(ID3D12Object*, LPCWSTR, uint32_t)
 {
 }
 #endif
@@ -196,7 +197,7 @@ inline void SetNameIndexed(ID3D12Object*, LPCWSTR, UINT)
 #define NAME_D3D12_OBJECT(x) SetName((x).Get(), L#x)
 #define NAME_D3D12_OBJECT_INDEXED(x, n) SetNameIndexed((x)[n].Get(), L#x, n)
 
-inline UINT CalculateConstantBufferByteSize(UINT byteSize)
+inline uint32_t CalculateConstantBufferByteSize(uint32_t byteSize)
 {
     // Constant buffer size is required to be aligned.
     return (byteSize + (D3D12_CONSTANT_BUFFER_DATA_PLACEMENT_ALIGNMENT - 1)) & ~(D3D12_CONSTANT_BUFFER_DATA_PLACEMENT_ALIGNMENT - 1);
@@ -209,7 +210,7 @@ inline Microsoft::WRL::ComPtr<ID3DBlob> CompileShader(
     const std::string& entrypoint,
     const std::string& target)
 {
-    UINT compileFlags = 0;
+    uint32_t compileFlags = 0;
 #if defined(_DEBUG) || defined(DBG)
     compileFlags = D3DCOMPILE_DEBUG | D3DCOMPILE_SKIP_OPTIMIZATION;
 #endif
@@ -235,7 +236,7 @@ inline Microsoft::WRL::ComPtr<ID3DBlob> CompileShader(
 template<class T>
 void ResetComPtrArray(T* comPtrArray)
 {
-    for (auto& i : *comPtrArray)
+    for (auto &i : *comPtrArray)
     {
         i.Reset();
     }
@@ -246,7 +247,7 @@ void ResetComPtrArray(T* comPtrArray)
 template<class T>
 void ResetUniquePtrArray(T* uniquePtrArray)
 {
-    for (auto& i : *uniquePtrArray)
+    for (auto &i : *uniquePtrArray)
     {
         i.reset();
     }

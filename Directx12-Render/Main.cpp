@@ -10,11 +10,11 @@
 //*********************************************************
 
 #include "stdafx.h"
-#include "DirectX12Render.h"
+#include "D3D12BetterSimpleBox.h"
 
 _Use_decl_annotations_
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE, LPSTR, int nCmdShow)
 {
-    DirectX12Render sample(1280, 720, L"DirectX 12 Renderer");
+	D3D12BetterSimpleBox sample(1280, 720, L"D3D12 Better Simple Box");
     return Win32Application::Run(&sample, hInstance, nCmdShow);
 }

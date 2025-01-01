@@ -1,23 +1,20 @@
 #include "Buffer.h"
 
-BufferView::BufferView(Buffer const* buffer) :
-	m_buffer(buffer),
-	m_byteSize(buffer ? buffer->GetByteSize() : 0),
-	m_offset(0) {
+BufferView::BufferView(Buffer const* buffer)
+	: buffer(buffer),
+	  byteSize(buffer ? buffer->GetByteSize() : 0),
+	  offset(0) {
 }
-
 BufferView::BufferView(
 	Buffer const* buffer,
-	UINT64 offset,
-	UINT64 byteSize) :
-	m_buffer(buffer),
-	m_byteSize(byteSize),
-	m_offset(offset) {
+	uint64 offset,
+	uint64 byteSize)
+	: buffer(buffer),
+	  offset(offset),
+	  byteSize(byteSize) {}
+Buffer::Buffer(
+	Device* device)
+	: Resource(device){
 }
-
-Buffer::Buffer(Device* device) :
-	Resource(device) {
-}
-
 Buffer::~Buffer() {
 }

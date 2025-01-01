@@ -17,7 +17,7 @@
 class DXSample
 {
 public:
-    DXSample(UINT width, UINT height, std::wstring name);
+    DXSample(uint32_t width, uint32_t height, std::wstring name);
     virtual ~DXSample();
 
     virtual void OnInit() = 0;
@@ -26,15 +26,15 @@ public:
     virtual void OnDestroy() = 0;
 
     // Samples override the event handlers to handle specific messages.
-    virtual void OnKeyDown(UINT8 /*key*/) {}
-    virtual void OnKeyUp(UINT8 /*key*/) {}
+    virtual void OnKeyDown(UINT8 /*key*/)   {}
+    virtual void OnKeyUp(UINT8 /*key*/)     {}
 
     // Accessors.
-    UINT GetWidth() const { return m_width; }
-    UINT GetHeight() const { return m_height; }
-    const WCHAR* GetTitle() const { return m_title.c_str(); }
+    uint32_t GetWidth() const           { return m_width; }
+    uint32_t GetHeight() const          { return m_height; }
+    const wchar_t* GetTitle() const   { return m_title.c_str(); }
 
-    void ParseCommandLineArgs(_In_reads_(argc) WCHAR* argv[], int argc);
+    void ParseCommandLineArgs(_In_reads_(argc) wchar_t* argv[], int argc);
 
 protected:
     std::wstring GetAssetFullPath(LPCWSTR assetName);
@@ -47,8 +47,8 @@ protected:
     void SetCustomWindowText(LPCWSTR text);
 
     // Viewport dimensions.
-    UINT m_width;
-    UINT m_height;
+    uint32_t m_width;
+    uint32_t m_height;
     float m_aspectRatio;
 
     // Adapter info.

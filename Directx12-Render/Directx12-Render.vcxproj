@@ -97,27 +97,71 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Buffer.cpp" />
+    <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="CommandListHandle.cpp" />
+    <ClCompile Include="D3D12BetterSimpleBox.cpp" />
     <ClCompile Include="DefaultBuffer.cpp" />
+    <ClCompile Include="DescriptorHeap.cpp" />
     <ClCompile Include="Device.cpp" />
-    <ClCompile Include="DirectX12Render.cpp" />
+    <ClCompile Include="DXMath.cpp" />
     <ClCompile Include="DXSample.cpp" />
+    <ClCompile Include="FrameResource.cpp" />
+    <ClCompile Include="GlobalSamplers.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="MathHelper.cpp" />
+    <ClCompile Include="Mesh.cpp" />
+    <ClCompile Include="PSOManager.cpp" />
+    <ClCompile Include="RasterShader.cpp" />
     <ClCompile Include="ReadbackBuffer.cpp" />
-    <ClCompile Include="Resource.h" />
-    <ClCompile Include="stdafx.cpp" />
+    <ClCompile Include="ReflactableStruct.cpp" />
+    <ClCompile Include="ResourceStateTracker.cpp" />
+    <ClCompile Include="Shader.cpp" />
+    <ClCompile Include="StackAllocator.cpp" />
+    <ClCompile Include="Texture.cpp" />
+    <ClCompile Include="UploadBuffer.cpp" />
     <ClCompile Include="Win32Application.cpp" />
+    <ClCompile Include="xxhash.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BindProperty.h" />
     <ClInclude Include="Buffer.h" />
     <ClInclude Include="BufferView.h" />
+    <ClInclude Include="Camera.h" />
+    <ClInclude Include="CommandListHandle.h" />
+    <ClInclude Include="Common.h" />
+    <ClInclude Include="D3D12BetterSimpleBox.h" />
+    <ClInclude Include="d3dx12.h" />
     <ClInclude Include="DefaultBuffer.h" />
+    <ClInclude Include="DescriptorHeap.h" />
+    <ClInclude Include="DescriptorHeapView.h" />
     <ClInclude Include="Device.h" />
-    <ClInclude Include="DirectX12Render.h" />
+    <ClInclude Include="DXMath.h" />
     <ClInclude Include="DXSample.h" />
     <ClInclude Include="DXSampleHelper.h" />
+    <ClInclude Include="FrameResource.h" />
+    <ClInclude Include="GlobalSamplers.h" />
+    <ClInclude Include="Hash.h" />
+    <ClInclude Include="MathHelper.h" />
+    <ClInclude Include="Matrix3.h" />
+    <ClInclude Include="Matrix4.h" />
+    <ClInclude Include="Mesh.h" />
     <ClInclude Include="Metalib.h" />
+    <ClInclude Include="PSOManager.h" />
+    <ClInclude Include="Quaternion.h" />
+    <ClInclude Include="RasterShader.h" />
     <ClInclude Include="ReadbackBuffer.h" />
+    <ClInclude Include="ReflactableStruct.h" />
+    <ClInclude Include="Resource.h" />
+    <ClInclude Include="ResourceStateTracker.h" />
+    <ClInclude Include="Scalar.h" />
+    <ClInclude Include="Shader.h" />
+    <ClInclude Include="ShaderVariableType.h" />
+    <ClInclude Include="StackAllocator.h" />
     <ClInclude Include="stdafx.h" />
+    <ClInclude Include="Swizzle.h" />
+    <ClInclude Include="Texture.h" />
+    <ClInclude Include="UploadBuffer.h" />
+    <ClInclude Include="Vector.h" />
     <ClInclude Include="Win32Application.h" />
   </ItemGroup>
   <ItemGroup>

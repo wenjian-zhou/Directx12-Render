@@ -1,8 +1,8 @@
 #pragma once
 #include <type_traits>
 template<typename T>
-	requires(!std::is_lvalue_reference_v<T>)
-T* get_rvalue_ptr(T&& v) {
+requires(!std::is_lvalue_reference_v<T>)
+	T* get_rvalue_ptr(T&& v) {
 	return &v;
 }
 template<typename T>
@@ -14,11 +14,11 @@ struct array_meta<T[N]> {
 };
 
 template<typename T>
-	requires(std::is_bounded_array_v<T>) constexpr size_t array_count(T const& t) {
+requires(std::is_bounded_array_v<T>) constexpr size_t array_count(T const& t) {
 	return array_meta<T>::array_size;
 }
 template<typename T>
-	requires(std::is_bounded_array_v<T>) constexpr size_t array_byte_size(T const& t) {
+requires(std::is_bounded_array_v<T>) constexpr size_t array_byte_size(T const& t) {
 	return array_meta<T>::byte_size;
 }
 

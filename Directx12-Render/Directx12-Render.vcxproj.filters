@@ -5,82 +5,228 @@
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
-    </Filter>
     <Filter Include="Assets">
       <UniqueIdentifier>{1bf45afd-87c6-4cde-89a7-229b375d975a}</UniqueIdentifier>
     </Filter>
     <Filter Include="Assets\Shaders">
       <UniqueIdentifier>{8f0eb990-9dc0-437b-9a59-b1d84754d360}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\DXMath">
+      <UniqueIdentifier>{13a4a5ec-75fa-4117-bf00-8216da4439cc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Component">
+      <UniqueIdentifier>{221818ec-aa54-4762-b9cf-385e9a29e155}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\DXRuntime">
+      <UniqueIdentifier>{00f05da7-9d9a-4564-9a50-7d4429be6e2f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Resource">
+      <UniqueIdentifier>{165ec21c-3eb2-40b3-bb25-d96c4f2ac096}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Shader">
+      <UniqueIdentifier>{edf57e0f-26f5-412e-8782-6b5ca7f47491}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Utility">
+      <UniqueIdentifier>{be88cc91-5330-43ac-a258-226e0ca5aa80}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Main.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="DXMath.cpp">
+      <Filter>Source Files\DXMath</Filter>
     </ClCompile>
-    <ClCompile Include="DirectX12Render.cpp">
+    <ClCompile Include="MathHelper.cpp">
+      <Filter>Source Files\DXMath</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>Source Files\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="CommandListHandle.cpp">
+      <Filter>Source Files\DXRuntime</Filter>
+    </ClCompile>
+    <ClCompile Include="Device.cpp">
+      <Filter>Source Files\DXRuntime</Filter>
+    </ClCompile>
+    <ClCompile Include="FrameResource.cpp">
+      <Filter>Source Files\DXRuntime</Filter>
+    </ClCompile>
+    <ClCompile Include="ResourceStateTracker.cpp">
+      <Filter>Source Files\DXRuntime</Filter>
+    </ClCompile>
+    <ClCompile Include="Buffer.cpp">
+      <Filter>Source Files\Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="DefaultBuffer.cpp">
+      <Filter>Source Files\Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="DescriptorHeap.cpp">
+      <Filter>Source Files\Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="ReadbackBuffer.cpp">
+      <Filter>Source Files\Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture.cpp">
+      <Filter>Source Files\Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="UploadBuffer.cpp">
+      <Filter>Source Files\Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="GlobalSamplers.cpp">
+      <Filter>Source Files\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="PSOManager.cpp">
+      <Filter>Source Files\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="RasterShader.cpp">
+      <Filter>Source Files\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="Shader.cpp">
+      <Filter>Source Files\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="ReflactableStruct.cpp">
+      <Filter>Source Files\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="StackAllocator.cpp">
+      <Filter>Source Files\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="xxhash.cpp">
+      <Filter>Source Files\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="D3D12BetterSimpleBox.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="DXSample.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="stdafx.cpp">
+    <ClCompile Include="Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Win32Application.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Device.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Resource.h">
-      <Filter>Header Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Buffer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="DefaultBuffer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ReadbackBuffer.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Mesh.cpp">
+      <Filter>Source Files\Resource</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="stdafx.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Common.h">
+      <Filter>Source Files\DXMath</Filter>
     </ClInclude>
-    <ClInclude Include="DXSample.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="DXMath.h">
+      <Filter>Source Files\DXMath</Filter>
     </ClInclude>
-    <ClInclude Include="DXSampleHelper.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="MathHelper.h">
+      <Filter>Source Files\DXMath</Filter>
     </ClInclude>
-    <ClInclude Include="Win32Application.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Matrix3.h">
+      <Filter>Source Files\DXMath</Filter>
     </ClInclude>
-    <ClInclude Include="DirectX12Render.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Matrix4.h">
+      <Filter>Source Files\DXMath</Filter>
+    </ClInclude>
+    <ClInclude Include="Quaternion.h">
+      <Filter>Source Files\DXMath</Filter>
+    </ClInclude>
+    <ClInclude Include="Scalar.h">
+      <Filter>Source Files\DXMath</Filter>
+    </ClInclude>
+    <ClInclude Include="Swizzle.h">
+      <Filter>Source Files\DXMath</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector.h">
+      <Filter>Source Files\DXMath</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>Source Files\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="BindProperty.h">
+      <Filter>Source Files\DXRuntime</Filter>
+    </ClInclude>
+    <ClInclude Include="CommandListHandle.h">
+      <Filter>Source Files\DXRuntime</Filter>
     </ClInclude>
     <ClInclude Include="Device.h">
-      <Filter>Header Files</Filter>
+      <Filter>Source Files\DXRuntime</Filter>
+    </ClInclude>
+    <ClInclude Include="FrameResource.h">
+      <Filter>Source Files\DXRuntime</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourceStateTracker.h">
+      <Filter>Source Files\DXRuntime</Filter>
     </ClInclude>
     <ClInclude Include="Buffer.h">
-      <Filter>Header Files</Filter>
+      <Filter>Source Files\Resource</Filter>
     </ClInclude>
     <ClInclude Include="BufferView.h">
-      <Filter>Header Files</Filter>
+      <Filter>Source Files\Resource</Filter>
     </ClInclude>
     <ClInclude Include="DefaultBuffer.h">
-      <Filter>Header Files</Filter>
+      <Filter>Source Files\Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="DescriptorHeap.h">
+      <Filter>Source Files\Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="DescriptorHeapView.h">
+      <Filter>Source Files\Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="Mesh.h">
+      <Filter>Source Files\Resource</Filter>
     </ClInclude>
     <ClInclude Include="ReadbackBuffer.h">
-      <Filter>Header Files</Filter>
+      <Filter>Source Files\Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>Source Files\Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture.h">
+      <Filter>Source Files\Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="UploadBuffer.h">
+      <Filter>Source Files\Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="GlobalSamplers.h">
+      <Filter>Source Files\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="PSOManager.h">
+      <Filter>Source Files\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="RasterShader.h">
+      <Filter>Source Files\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="Shader.h">
+      <Filter>Source Files\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="ShaderVariableType.h">
+      <Filter>Source Files\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="Hash.h">
+      <Filter>Source Files\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="ReflactableStruct.h">
+      <Filter>Source Files\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="StackAllocator.h">
+      <Filter>Source Files\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="D3D12BetterSimpleBox.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="d3dx12.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DXSample.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DXSampleHelper.h">
+      <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="Metalib.h">
-      <Filter>Header Files</Filter>
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Win32Application.h">
+      <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
